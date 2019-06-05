@@ -28,17 +28,17 @@ public interface ProductService {
 
 	/**
 	 * 新增用户
-	 * @param user
+	 * @param product
 	 * @return
 	 */
-	Product insert(Product user);
+	Product insert(Product product);
 
 	/**
 	 * 更新用户
-	 * @param user
+	 * @param product
 	 * @return
 	 */
-	Product update(Product user);
+	Product update(Product product);
 
 	/**
 	 * 删除用户

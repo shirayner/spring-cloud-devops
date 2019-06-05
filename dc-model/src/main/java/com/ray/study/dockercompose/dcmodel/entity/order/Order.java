@@ -8,6 +8,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
@@ -22,7 +23,7 @@ import java.util.Date;
 @AllArgsConstructor
 @Entity
 @Table(name = "dc_order")
-public class Order {
+public class Order  implements Serializable {
 
 	@ApiModelProperty(value = "订单ID", example = "10001")
 	@Id
