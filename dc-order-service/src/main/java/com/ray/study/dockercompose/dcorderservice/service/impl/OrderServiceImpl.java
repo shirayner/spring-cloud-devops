@@ -6,6 +6,9 @@ import com.ray.study.dockercompose.dcmodel.entity.product.Product;
 import com.ray.study.dockercompose.dcorderservice.client.ProductClient;
 import com.ray.study.dockercompose.dcorderservice.repository.OrderRepository;
 import com.ray.study.dockercompose.dcorderservice.service.OrderService;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -30,6 +33,7 @@ public class OrderServiceImpl implements OrderService {
 	}
 
 
+	// 命中率低，因此不采用缓存
 	@Override
 	public List<Order> list() {
 		List<Order> orderList = orderRepository.findAll();
@@ -41,6 +45,7 @@ public class OrderServiceImpl implements OrderService {
 
 	}
 
+	@Cacheable(value = "dc-order",key = "#id")
 	@Override
 	public Order query(Long id) {
 		Optional<Order> orderOptional = orderRepository.findById(id);
@@ -52,6 +57,7 @@ public class OrderServiceImpl implements OrderService {
 		return orderOptional.orElse(null);
 	}
 
+	@CachePut(value = "dc-order", key = "#order.id")
 	@Override
 	public Order create(Order order) {
 
@@ -71,6 +77,7 @@ public class OrderServiceImpl implements OrderService {
 		return orderRepository.save(order);
 	}
 
+	@CachePut(value = "dc-order", key = "#order.id")
 	@Override
 	public Order pay(Order order) {
 		order.setOrderStatus(1);
@@ -80,7 +87,7 @@ public class OrderServiceImpl implements OrderService {
 		return orderRepository.save(order);
 	}
 
-
+	@CacheEvict(value = "dc-order", key = "#id")
 	@Override
 	public void delete(Long id) {
 		orderRepository.deleteById(id);

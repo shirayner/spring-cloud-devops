@@ -1,4 +1,4 @@
-package com.ray.study.dockercompose.dcproductservice.config;
+package com.ray.study.dockercompose.dcorderservice.config;
 
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.EnableCaching;
@@ -27,7 +27,6 @@ import java.io.Serializable;
 @EnableCaching
 public class CacheConfiguration {
 
-
 	/**
 	 * 定义 cache key 的生成策略
 	 * @return
@@ -45,6 +44,7 @@ public class CacheConfiguration {
 			return sb.toString();
 		};
 	}
+
 
 	@Bean
 	public RedisTemplate<String, Serializable> redisTemplate(LettuceConnectionFactory redisConnectionFactory) {
@@ -71,4 +71,6 @@ public class CacheConfiguration {
 	}
 
 
+
 }
+

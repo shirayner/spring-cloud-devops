@@ -25,7 +25,7 @@ public class ProductServiceImpl implements ProductService {
 		this.productRepository = productRepository;
 	}
 
-	@Cacheable(value = "dc-product")
+	// 命中率低，因此不采用缓存
 	@Override
 	public List<Product> list() {
 		return productRepository.findAll();
@@ -50,7 +50,7 @@ public class ProductServiceImpl implements ProductService {
 		return productRepository.save(product);
 	}
 
-	@CacheEvict(value = "dc-product")
+	@CacheEvict(value = "dc-product", key = "#id")
 	@Override
 	public void delete(Long id) {
 		productRepository.deleteById(id);

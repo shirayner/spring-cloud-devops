@@ -28,7 +28,7 @@ public class Order  implements Serializable {
 	@ApiModelProperty(value = "订单ID", example = "10001")
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
+	private Long id;
 
 	/**
 	 * 简单起见，暂时只支持一个订单只有一个商品
