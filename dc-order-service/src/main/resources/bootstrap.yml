@@ -1,0 +1,8 @@
+server:
+  port: 8781
+
+spring:
+  application:
+    name: dc-order-service   #指定服务名
+  profiles:
+    active: dev

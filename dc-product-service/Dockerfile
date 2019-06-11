@@ -11,10 +11,9 @@ ARG JAR_FILE
 ADD ${JAR_FILE} app.jar
 RUN sh -c 'touch /app.jar'
 ENV JAVA_OPTS=""
-ENV ENV=""
 
 # 开放8761端口
-EXPOSE 8761
+EXPOSE 8771
 
 # 配置容器启动后执行的命令
-ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar --spring.profiles.active=$ENV" ]
+ENTRYPOINT [ "sh", "-c", "java $JAVA_OPTS -Djava.security.egd=file:/dev/./urandom -jar /app.jar " ]

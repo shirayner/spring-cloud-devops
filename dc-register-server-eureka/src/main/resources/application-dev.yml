@@ -1,10 +1,3 @@
-server:
-  port: 8761  #服务端口
-
-spring:
-  application:
-    name: dc-register-server   #指定服务名
-
 eureka:
   instance:
     hostname: localhost
