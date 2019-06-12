@@ -1,20 +1,27 @@
 # docker-compose.yaml
+# 各容器间通过服务名为默认的hostname进行访问，因此application.yml中要使用服务名
 version: "3"
 services:
-  register-server-0:
-    container_name: register-server-0
-    hostname: register-server
+  peer1:
     image: registry.cn-shanghai.aliyuncs.com/shirayner/dc-register-server-eureka:1.1.0
-    environment:
-      - spring.profiles.active=dev
     ports:
       - "8761:8761"
+    environment:
+      - spring.profiles.active=peer1
     networks:
       - backend
 
-  product-service-0:
-    container_name: product-service-0
-    hostname: product-service
+  peer2:
+    image: registry.cn-shanghai.aliyuncs.com/shirayner/dc-register-server-eureka:1.1.0
+    hostname: peer2
+    ports:
+      - "8762:8762"
+    environment:
+      - spring.profiles.active=peer2
+    networks:
+      - backend
+
+  product-service:
     image: registry.cn-shanghai.aliyuncs.com/shirayner/dc-product-service:1.1.0
     environment:
       - spring.profiles.active=dev
@@ -29,9 +36,7 @@ services:
       - backend
       - frontend
 
-  order-service-0:
-    container_name: order-service-0
-    hostname: order-service
+  order-service:
     image: registry.cn-shanghai.aliyuncs.com/shirayner/dc-order-service:1.1.0
     environment:
       - spring.profiles.active=dev
@@ -48,8 +53,6 @@ services:
 
 
   redis:
-    container_name: redis
-    hostname: redis
     image: redis:4.0.11
     ports:
       - "6379:6379"
@@ -58,8 +61,6 @@ services:
 
 
   mysql:
-    container_name: mysql
-    hostname: mysql
     image: mysql:8.0.16
     ports:
       - "3306:3306"

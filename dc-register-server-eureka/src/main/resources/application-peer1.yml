@@ -1,0 +1,11 @@
+server:
+  port: 8761 #服务端口
+
+eureka:
+  instance:
+    hostname: peer1
+  client:
+    serviceUrl:              #Eureka客户端与Eureka服务端的交互地址，高可用状态配置对方的地址，单机状态配置自己（如果不配置则默认本机8761端口）
+      defaultZone: http://peer2:8762/eureka/
+
+
