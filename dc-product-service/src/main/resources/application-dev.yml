@@ -1,7 +1,10 @@
+server:
+  port: 8771
+
 spring:
   datasource:       # 配置数据源
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/dc_product_service?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
+    url: jdbc:mysql://${MYSQL_HOST:localhost}:3306/dc_product_service?useUnicode=true&characterEncoding=utf8&serverTimezone=GMT%2B8
     username: root
     password: root
   jpa:                 # 配置jpa
@@ -9,7 +12,9 @@ spring:
     show-sql: true        # 打印sql语句
     hibernate:
       ddl-auto: update    # 加载 Hibernate时， 自动更新数据库结构
-
+  redis:
+    host: ${REDIS_HOST:localhost}
+    port: 6379
 
 eureka:
   instance:
@@ -19,6 +24,6 @@ eureka:
     registerWithEureka: true   #服务注册开关
     fetchRegistry: true        #服务发现开关
     serviceUrl:   #Eureka客户端与Eureka服务端进行交互的地址，多个中间用逗号分隔
-      defaultZone: http://localhost:8761/eureka/    # 指定 Eureka Server 地址
+      defaultZone: http://register-server:8761/eureka/    # 指定 Eureka Server 地址
 
 debug: true

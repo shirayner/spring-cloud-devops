@@ -1,5 +1,3 @@
-server:
-  port: #服务端口
 spring:
   application:
     name: dc-register-server   #指定服务名
